@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../TransportManagement.Tests/TransportManagement.Tests.csproj" Id="34a7a2f4-b96e-4869-a9c1-5df69fca34be" />
+  <Project Path="TransportManagement.csproj" />
+</Solution>

@@ -1,0 +1,182 @@
+/* ==========================================================================
+   1. Root Variables & Configuration
+   ========================================================================== */
+:root {
+    /* Brand Colors */
+    --primary: #2563eb;
+    --secondary: #64748b;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --info: #0ea5e9;
+    /* Soft Backgrounds for Icons/Badges */
+    --primary-soft: #eef2ff;
+    --success-soft: #ecfdf5;
+    --warning-soft: #fffbeb;
+    --info-soft: #f0f9ff;
+    /* Layout Colors */
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+}
+
+/* ==========================================================================
+   2. Base Styles
+   ========================================================================== */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    background-color: var(--background);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    margin-bottom: 60px; /* Space for footer */
+}
+
+/* ==========================================================================
+   3. Utility Classes (Backgrounds & Animations)
+   ========================================================================== */
+.bg-primary-soft {
+    background-color: var(--primary-soft);
+}
+
+.bg-success-soft {
+    background-color: var(--success-soft);
+}
+
+.bg-warning-soft {
+    background-color: var(--warning-soft);
+}
+
+.bg-info-soft {
+    background-color: var(--info-soft);
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   4. UI Components (Cards, Buttons, Navbar)
+   ========================================================================== */
+
+/* Modern Navbar */
+.navbar {
+    background: var(--card-bg) !important;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary) !important;
+    letter-spacing: -0.5px;
+}
+
+/* Dashboard Cards */
+.main-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+/* Buttons & Inputs Focus */
+.btn-primary {
+    background-color: var(--primary);
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    border-radius: 8px;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
+.form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* ==========================================================================
+   5. Icon Shapes & Hover Effects
+   ========================================================================== */
+.icon-box {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.25rem;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.75rem;
+}
+
+.icon-circle-lg {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 1.5rem;
+}
+
+/* Hover Interactions */
+.border-hover-primary:hover {
+    border-color: #0d6efd !important;
+    background-color: #fcfdff;
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.08) !important;
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+    transition: transform 0.2s ease;
+}
+
+/* ==========================================================================
+   6. Modern Tables
+   ========================================================================== */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+    .table thead th {
+        border: none;
+        color: var(--secondary);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+
+    .table tbody tr {
+        background-color: var(--card-bg);
+        transition: transform 0.2s;
+    }
+
+        .table tbody tr:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+        }

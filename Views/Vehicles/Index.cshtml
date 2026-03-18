@@ -1,0 +1,106 @@
+﻿@model IEnumerable<TransportManagement.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Vehicle Fleet Management";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Vehicle Fleet Management</h2>
+            <p class="text-muted">Register and manage your transport assets</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="main-card shadow-sm mb-4">
+                <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-truck me-2"></i>Register New Vehicle</h5>
+                <form asp-action="AddVehicle" method="post">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-uppercase text-muted">Model Name</label>
+                        <input name="Model" type="text" class="form-control" required placeholder="e.g. Toyota Coaster" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-uppercase text-muted">Vehicle Type</label>
+                        <input name="Type" type="text" class="form-control" required placeholder="e.g. Bus, Van, Minibus" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-uppercase text-muted">Capacity</label>
+                            <input name="Capacity" type="number" class="form-control" required placeholder="Seats" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-uppercase text-muted">Initial Status</label>
+                            <select name="Status" class="form-select">
+                                <option value="Available">Available</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="On Trip">On Trip</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 py-2 shadow-sm mt-2">Add Vehicle to Fleet</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="main-card shadow-sm">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr class="text-secondary small text-uppercase">
+                                <th class="ps-3">ID</th>
+                                <th>Vehicle Info</th>
+                                <th>Type</th>
+                                <th>Capacity</th>
+                                <th>Status</th>
+                                <th class="text-end pe-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="ps-3 text-muted small">#@item.VehicleID</td>
+                                        <td>
+                                            <div class="fw-bold">@item.Model</div>
+                                        </td>
+                                        <td>
+                                            <span class="text-secondary">@item.Type</span>
+                                        </td>
+                                        <td>
+                                            <div class="badge bg-light text-dark border">@item.Capacity Seats</div>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill @(item.Status == "Available" ? "bg-success-soft text-success" : (item.Status == "Maintenance" ? "bg-danger-soft text-danger" : "bg-primary-soft text-primary"))">
+                                                @item.Status
+                                            </span>
+                                        </td>
+                                        <td class="text-end pe-3">
+                                            <form asp-action="DeleteVehicle" method="post" class="d-inline" onsubmit="return confirm('Remove this vehicle from the fleet?');">
+                                                <input type="hidden" name="vehicleId" value="@item.VehicleID" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center py-5 text-muted">
+                                        <i class="bi bi-truck-flatbed fs-1 d-block mb-3"></i>
+                                        No vehicles registered yet.
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid pb-5 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-5 pt-4">
+        <div>
+            <h1 class="display-4 fw-bold mb-0 text-dark">
+                <i class="bi bi-airplane-engines text-primary me-2"></i>8848 <span class="text-primary">Travels</span>
+            </h1>
+            <p class="text-secondary fs-5 mb-0 ms-1">
+                <i class="bi bi-grid-1x2-fill small me-2"></i>Fleet & Transport Management System
+            </p>
+        </div>
+
+        <div class="bg-white p-3 rounded-4 shadow-sm border d-flex gap-3 align-items-center">
+            <div class="text-end me-2 d-none d-md-block">
+                <small class="text-muted d-block small fw-bold text-uppercase">System Access</small>
+                <span class="text-dark small fw-semibold">Admin Terminal</span>
+            </div>
+            <div class="vr mx-2 d-none d-md-block"></div>
+            <div class="d-flex gap-2">
+                <a asp-controller="Bookings" asp-action="Index" class="btn btn-outline-primary px-3 shadow-sm d-flex align-items-center">
+                    <i class="bi bi-journal-bookmark-fill me-2"></i> Bookings
+                </a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-dark px-3 shadow-sm d-flex align-items-center">
+                    <i class="bi bi-shield-lock-fill me-2"></i> Login
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="stat-card border-start border-primary border-4 shadow-sm bg-white p-4 rounded-3">
+                <span class="text-secondary small fw-bold text-uppercase">Active Trips</span>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <h2 class="fw-bold mb-0">24</h2>
+                    <div class="icon-box bg-primary-soft text-primary">
+                        <i class="bi bi-signpost-split-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card border-start border-success border-4 shadow-sm bg-white p-4 rounded-3">
+                <span class="text-secondary small fw-bold text-uppercase">Fleet Size</span>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <h2 class="fw-bold mb-0">150</h2>
+                    <div class="icon-box bg-success-soft text-success">
+                        <i class="bi bi-truck-front-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card border-start border-warning border-4 shadow-sm bg-white p-4 rounded-3">
+                <span class="text-secondary small fw-bold text-uppercase">Passengers</span>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <h2 class="fw-bold mb-0">1,248</h2>
+                    <div class="icon-box bg-warning-soft text-warning">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card border-start border-info border-4 shadow-sm bg-white p-4 rounded-3">
+                <span class="text-secondary small fw-bold text-uppercase">Routes</span>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <h2 class="fw-bold mb-0">42</h2>
+                    <div class="icon-box bg-info-soft text-info">
+                        <i class="bi bi-bezier2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-card shadow-sm border-0 bg-white p-4 rounded-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="h5 fw-bold mb-0 text-dark">
+                <i class="bi bi-layers-half me-2 text-primary"></i>Operations Control
+            </h3>
+            <a asp-controller="Bookings" asp-action="Index" class="btn btn-sm btn-primary px-3 rounded-pill">
+                <i class="bi bi-plus-circle-fill me-1"></i> New Booking
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 border rounded-4 h-100 transition-all border-hover-primary text-center">
+                    <div class="icon-circle bg-primary-soft text-primary mb-3 mx-auto">
+                        <i class="bi bi-bus-front-fill"></i>
+                    </div>
+                    <h4 class="h6 fw-bold mb-2">Vehicle Management</h4>
+                    <p class="small text-muted mb-4">Monitor health, assignments, and registrations.</p>
+                    <a asp-controller="Vehicles" asp-action="Index" class="btn btn-sm btn-outline-primary w-100 py-2 rounded-3">Access Fleet</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 border rounded-4 h-100 transition-all border-hover-primary text-center">
+                    <div class="icon-circle bg-primary-soft text-primary mb-3 mx-auto">
+                        <i class="bi bi-calendar-check-fill"></i>
+                    </div>
+                    <h4 class="h6 fw-bold mb-2">Trip Scheduling</h4>
+                    <p class="small text-muted mb-4">Review ongoing journeys and departures.</p>
+                    <a asp-controller="Trips" asp-action="Index" class="btn btn-sm btn-outline-primary w-100 py-2 rounded-3">Manage Trips</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 border rounded-4 h-100 transition-all border-hover-primary text-center">
+                    <div class="icon-circle bg-primary-soft text-primary mb-3 mx-auto">
+                        <i class="bi bi-map-fill"></i>
+                    </div>
+                    <h4 class="h6 fw-bold mb-2">Route Optimization</h4>
+                    <p class="small text-muted mb-4">Define travel paths and transit durations.</p>
+                    <a asp-controller="TransportRoutes" asp-action="Index" class="btn btn-sm btn-outline-primary w-100 py-2 rounded-3">View Routes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="p-4 shadow-sm rounded-4 bg-white border-0 d-flex align-items-center hover-lift">
+                <div class="flex-shrink-0 me-3">
+                    <div class="icon-circle-lg bg-light text-primary">
+                        <i class="bi bi-person-badge-fill"></i>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h3 class="h6 fw-bold text-dark mb-1">Passenger Database</h3>
+                    <p class="small text-muted mb-0">Profiles, contact info, and history.</p>
+                </div>
+                <a asp-controller="Passengers" asp-action="Index" class="btn btn-sm btn-light border px-4 rounded-pill">
+                    Directory <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="p-4 shadow-sm rounded-4 bg-white border-0 d-flex align-items-center opacity-75">
+                <div class="flex-shrink-0 me-3">
+                    <div class="icon-circle-lg bg-light text-secondary">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h3 class="h6 fw-bold text-dark mb-1">System Reports</h3>
+                    <p class="small text-muted mb-0">Efficiency and usage summaries.</p>
+                </div>
+                <button class="btn btn-sm btn-light border px-4 rounded-pill" disabled>
+                    Locked <i class="bi bi-lock-fill ms-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

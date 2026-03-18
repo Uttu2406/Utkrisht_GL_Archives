@@ -1,0 +1,128 @@
+﻿@model IEnumerable<TransportManagement.Models.Trip>
+
+@{
+    ViewData["Title"] = "Trip Management";
+}
+
+<div class="container-fluid py-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="fw-bold">Trip Management</h2>
+            <p class="text-secondary mb-0"><i class="bi bi-calendar3 me-2"></i>Schedule and monitor active transport routes</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="main-card shadow-sm border-0 p-4 rounded-4 bg-white">
+                <h5 class="fw-bold mb-4 d-flex align-items-center">
+                    <div class="icon-box bg-primary-soft text-primary me-3">
+                        <i class="bi bi-plus-square-dotted"></i>
+                    </div>
+                    Schedule New Trip
+                </h5>
+
+                <form asp-action="ScheduleTrip" method="post">
+                    <div class="mb-3">
+                        <label class="form-label small text-uppercase fw-bold text-muted">Vehicle ID</label>
+                        <input name="vehicleId" type="number" class="form-control bg-light border-0 py-2" placeholder="e.g. 101" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-uppercase fw-bold text-muted">Route ID</label>
+                        <input name="routeId" type="number" class="form-control bg-light border-0 py-2" placeholder="e.g. 5" required />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small text-uppercase fw-bold text-muted">Departure</label>
+                            <input name="departureDate" type="datetime-local" class="form-control bg-light border-0" required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small text-uppercase fw-bold text-muted">Arrival</label>
+                            <input name="arrivalDate" type="datetime-local" class="form-control bg-light border-0" required />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-3 shadow-sm fw-bold mt-2">
+                        <i class="bi bi- sailboat me-2"></i>Schedule Trip
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="main-card shadow-sm border-0 p-0 rounded-4 bg-white overflow-hidden">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr class="text-secondary small text-uppercase">
+                                <th class="ps-4 py-3">Route & ID</th>
+                                <th>Vehicle</th>
+                                <th>Departure</th>
+                                <th>Status</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr class="@(item.Status == "Cancelled" ? "opacity-50" : "")">
+                                        <td class="ps-4">
+                                            <div class="fw-bold text-dark">@(item.Route?.EndDestination ?? "N/A")</div>
+                                            <div class="small text-muted">Trip #@item.TripID</div>
+                                        </td>
+                                        <td>
+                                            @if (item.Vehicle != null)
+                                            {
+                                                <div class="d-flex align-items-center">
+                                                    <div class="icon-box bg-primary-soft text-primary me-2" style="width: 35px; height: 35px; font-size: 1rem;">
+                                                        <i class="bi bi-truck"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="fw-bold">@item.Vehicle.Model</div>
+                                                        <div class="small text-muted">ID: @item.VehicleID</div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger small"><i class="bi bi-exclamation-triangle me-1"></i>Null Data</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="text-dark fw-bold">@item.DepartureDate.ToString("HH:mm")</div>
+                                            <div class="small text-muted">@item.DepartureDate.ToString("MMM dd")</div>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill @(item.Status == "Scheduled" ? "bg-success-soft text-success" : "bg-danger-soft text-danger") px-3">
+                                                @item.Status
+                                            </span>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            @if (item.Status != "Cancelled")
+                                            {
+                                                <form asp-action="CancelTrip" method="post" class="d-inline">
+                                                    <input type="hidden" name="tripId" value="@item.TripID" />
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger px-3 rounded-pill">Cancel</button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center py-5 text-muted">No trips scheduled.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

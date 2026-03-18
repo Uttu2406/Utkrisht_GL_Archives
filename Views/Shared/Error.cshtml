@@ -1,0 +1,48 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="mb-0"><i class="bi bi-exclamation-triangle-fill"></i> An Error Occurred</h3>
+                </div>
+                <div class="card-body text-center">
+                    <h2 class="text-info my-4">@Model.ErrorMessage</h2> 
+
+                    <p class="lead">We couldn't find the resource you were looking for. Please check the ID and try again.</p>
+
+                    <div class="d-grid gap-2 d-md-block mt-4">
+                        <a asp-controller="Vehicles" asp-action="Index" class="btn btn-primary">
+                            Back to Vehicle List
+                        </a>
+                        <button onclick="history.back()" class="btn btn-outline-secondary">
+                            Go Back
+                        </button>
+                    </div>
+                </div>
+
+                @if (Model.ShowRequestId)
+                {
+                    <div class="card-footer bg-light text-muted">
+                        <small><strong>Request ID:</strong> <code>@Model.RequestId</code></small>
+                    </div>
+                }
+            </div>
+
+            @if (Context.Items["IsDevelopment"] as bool? == true)
+            {
+                <div class="alert alert-warning mt-4">
+                    <h5>Development Mode</h5>
+                    <p>
+                        Swapping to <strong>Development</strong> environment will display more detailed information about the error.
+                        <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
